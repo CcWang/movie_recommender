@@ -14,7 +14,8 @@ class UsersController < ApplicationController
       @user.save
       $counter = 1
       session[:user_id] = @user.id
-      render :set_up
+      # render :set_up
+      redirect_to :controller=>'users', :action=>'set_up', :id=>current_user.id
     end
   end
 
@@ -23,8 +24,6 @@ class UsersController < ApplicationController
 
   def set_up
     ApisController.get_top_movie
-
-
   end
 
   def carts
