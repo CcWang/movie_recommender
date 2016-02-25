@@ -1,21 +1,4 @@
-<!-- 
-<% content_for :jquery do %>
-    var counter = 0
-    $('[data-toggle="popover"]').popover();
-    $('img').click(function(){
-      counter +=1
-      console.log(counter)
-      movie_id = $(this).attr('id')
-      movie_title = $(this).attr('alt')
-      movie_pic = $(this).attr('src')
-      $(this).addClass('unclick')
-      cart = "<div class='col-sm-6'><p></p>"
-      cart += "<img width='150' src="+ movie_pic+ "/>"
-      cart +="<input type='hidden' name='movie_id"+counter+"' value='" +movie_id +"'/>"
-      cart +="<input type='hidden' name='movie_title"+counter+"' value='" +movie_title +"'/></div>"
-      $('#user_cart').append(cart)
-    });
-<% end%> -->
+
 <div class="container">
   <h1>Please pick your favorite movies</h1>
   <div class="row col-sm-8">
@@ -36,5 +19,4 @@
                       {:movies => $movies,  authenticity_token: form_authenticity_token},
                       {:prerender=>true} ) %>
  
-</div>
 
