@@ -9,6 +9,11 @@ class ApisController < ApplicationController
     uri = $get_top_movie +"&page="+$counter.to_s
     data = open(uri)
    $movies = JSON.load(data)
+  #  $form ={
+  #   :action => 'users/carts',
+  #   :csrf_param => request_forgery_protection_token,
+  #   :csrf_token => form_authenticity_token
+  # }
     #  render :text =>data
     # redirect_to :controller=>'users', :action=>'set_up', :id=>current_user.id
   end

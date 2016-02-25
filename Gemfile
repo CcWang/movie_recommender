@@ -47,3 +47,4 @@ gem 'rails_12factor', group: :production
 gem'bcrypt'
 gem 'hirb'
 gem 'rails-footnotes', '>= 4.0.0'
+gem 'react-bootstrap-rails', '~> 0.13.0'
