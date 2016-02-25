@@ -152,6 +152,7 @@ DEPENDENCIES
   hirb
   jbuilder (~> 2.0)
   jquery-rails
+  json
   less-rails
   pg
   rails (= 4.1.8)

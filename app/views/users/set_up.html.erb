@@ -1,24 +1,39 @@
+<% content_for :jquery do %>
+
+    $('[data-toggle="popover"]').popover();
+
+<% end%>
 <div class="container">
-  <form>
-  <h1>Please pick your favorite movie kind</h1>
-  Drama
-  Horror
-  Comedy
-  Action
-  Thriller
-  Crime
-  Adventure
-  Documentary
-  Fantasy
-  Historical
-  Science Fiction
-  Animation
-  Family
-  Romance
-  Political
-  Music
-  Mystery
-  War
-  Speculative
+  <h1>Please pick your favorite movies</h1>
+  <div class="row col-sm-12">
+  <form action="/apis/top_moive" method="get" class='col-sm-2'>
+    <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>"/>
+    <input type="hidden" name="page" value="1"/>
+
+    <input type="submit" class="btn btn-primary" value="Pick Your Movies">
   </form>
+  <form action="/apis/top_moive/prev" method="get" class='col-sm-2'>
+    <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>"/>
+
+    <input type="submit" class="btn btn-primary" value="previous">
+  </form>
+  <form action="/apis/top_moive/next" method="get" class='col-sm-2'>
+    <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>"/>
+    <input type="submit" class="btn btn-primary" value="next">
+  </form>
+</div>
+  <% if  $movies %>
+    <div class="row">
+      <div class="col-sm-12" >
+        <% $movies['results'].each do |m| %>
+          <div class="col-sm-4">
+            <h4><%=m['title']%></h4>
+            <a href="#" data-toggle="popover" data-html ='true' title="<h4>Movie Overview</h4>" data-placement="right" data-trigger="hover" data-content="<p><b><%=m['overview']%></b></p>">
+              <img src='http://image.tmdb.org/t/p/w500<%= m['poster_path'] %>' alt='emoji'width="300"/>
+            </a>
+          </div>
+        <%end%>
+      </div>
+    </div>
+  <%end %>
 </div>
