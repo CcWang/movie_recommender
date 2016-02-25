@@ -1,16 +1,23 @@
 <% content_for :jquery do %>
-
+    var counter = 0
     $('[data-toggle="popover"]').popover();
     $('img').click(function(){
+      counter +=1
+      console.log(counter)
       movie_id = $(this).attr('id')
       movie_title = $(this).attr('alt')
-      cart = "<p>"+movie_title+"</P>"
+      movie_pic = $(this).attr('src')
+      $(this).addClass('unclick')
+      cart = "<div class='col-sm-6'><p></p>"
+      cart += "<img width='150' src="+ movie_pic+ "/>"
+      cart +="<input type='hidden' name='movie_id"+counter+"' value='" +movie_id +"'/>"
+      cart +="<input type='hidden' name='movie_title"+counter+"' value='" +movie_title +"'/></div>"
       $('#user_cart').append(cart)
     });
 <% end%>
 <div class="container">
   <h1>Please pick your favorite movies</h1>
-  <div class="row col-sm-12">
+  <div class="row col-sm-8">
     <% if $counter >=2%>
   <form action="/apis/top_moive/prev" method="get" class='col-sm-2'>
     <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>"/>
@@ -25,18 +32,23 @@
 </div>
   <% if  $movies %>
     <div class="row">
-      <div class="col-sm-12" >
+      <div class="col-sm-8" >
         <% $movies['results'].each do |m| %>
-          <div class="col-sm-4">
+          <div class="col-sm-6">
             <h3><%=m['title']%></h3>
-            <a href="#" data-toggle="popover" data-html ='true' title="<h4>Movie Overview</h4>" data-placement="bottom" data-trigger="focus" data-content="<p><b><%=m['overview']%></b></p>">
+            <a href="#" data-toggle="popover" data-html ='true' title="<h4>Movie Overview</h4>" data-placement="bottom" data-trigger="hover" data-content="<p><%=m['overview']%></p>">
               <img src='http://image.tmdb.org/t/p/w500<%= m['poster_path'] %>' alt="<%=m['title']%>"width="300" id="<%=m['id']%>"/>
             </a>
           </div>
         <%end%>
       </div>
+      <div class="row col-sm-4">
+        <h4>Your movies</h4>
+        <form id='user_cart' action="/users/carts" method="post">
+          <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>"/>
+          <input type="submit" value="set" class='btn btn-success '>
+        </form>
+      </div>
     </div>
   <%end %>
-</div>
-<div id='user_cart'>
 </div>

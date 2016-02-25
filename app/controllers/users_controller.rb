@@ -28,7 +28,7 @@ class UsersController < ApplicationController
   end
 
   def carts
-    # puts data.inspect
+    fail
   end
   private
   def user_params
