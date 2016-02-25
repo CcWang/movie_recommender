@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get 'apis/top_moive/next'=>'apis#top_rated_next'
   get 'apis/top_moive/prev'=>'apis#top_rated_prev'
   post 'users' => 'users#create'
+  post 'users/carts'=>'users#carts'
   post 'session'=>'session#create'
   delete 'session'=>'session#destroy'
   # The priority is based upon order of creation: first created -> highest priority.

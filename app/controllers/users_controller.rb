@@ -12,19 +12,24 @@ class UsersController < ApplicationController
     else
       #save user, get top rated movies for users to pick
       @user.save
+      $counter = 1
       session[:user_id] = @user.id
-      redirect_to "/users/#{current_user.id}/set_up"
+      render :set_up
     end
   end
 
   def show
-
   end
 
   def set_up
+    ApisController.get_top_movie
+
 
   end
 
+  def carts
+    # puts data.inspect
+  end
   private
   def user_params
     params.require(:user).permit(:email,:first_name,:last_name,:password,:password_confirmation)

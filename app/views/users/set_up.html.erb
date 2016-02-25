@@ -1,25 +1,26 @@
 <% content_for :jquery do %>
 
     $('[data-toggle="popover"]').popover();
-
+    $('img').click(function(){
+      movie_id = $(this).attr('id')
+      movie_title = $(this).attr('alt')
+      cart = "<p>"+movie_title+"</P>"
+      $('#user_cart').append(cart)
+    });
 <% end%>
 <div class="container">
   <h1>Please pick your favorite movies</h1>
   <div class="row col-sm-12">
-  <form action="/apis/top_moive" method="get" class='col-sm-2'>
-    <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>"/>
-    <input type="hidden" name="page" value="1"/>
-
-    <input type="submit" class="btn btn-primary" value="Pick Your Movies">
-  </form>
+    <% if $counter >=2%>
   <form action="/apis/top_moive/prev" method="get" class='col-sm-2'>
     <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>"/>
 
-    <input type="submit" class="btn btn-primary" value="previous">
+    <input type="submit" class="btn btn-primary" value="previous movie page">
   </form>
+  <%end%>
   <form action="/apis/top_moive/next" method="get" class='col-sm-2'>
     <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>"/>
-    <input type="submit" class="btn btn-primary" value="next">
+    <input type="submit" class="btn btn-primary" value="next movie page">
   </form>
 </div>
   <% if  $movies %>
@@ -27,13 +28,15 @@
       <div class="col-sm-12" >
         <% $movies['results'].each do |m| %>
           <div class="col-sm-4">
-            <h4><%=m['title']%></h4>
-            <a href="#" data-toggle="popover" data-html ='true' title="<h4>Movie Overview</h4>" data-placement="right" data-trigger="hover" data-content="<p><b><%=m['overview']%></b></p>">
-              <img src='http://image.tmdb.org/t/p/w500<%= m['poster_path'] %>' alt='emoji'width="300"/>
+            <h3><%=m['title']%></h3>
+            <a href="#" data-toggle="popover" data-html ='true' title="<h4>Movie Overview</h4>" data-placement="bottom" data-trigger="focus" data-content="<p><b><%=m['overview']%></b></p>">
+              <img src='http://image.tmdb.org/t/p/w500<%= m['poster_path'] %>' alt="<%=m['title']%>"width="300" id="<%=m['id']%>"/>
             </a>
           </div>
         <%end%>
       </div>
     </div>
   <%end %>
+</div>
+<div id='user_cart'>
 </div>
