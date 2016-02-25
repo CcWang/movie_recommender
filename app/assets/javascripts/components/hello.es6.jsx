@@ -30,7 +30,7 @@ var Setup = React.createClass({
   render() {
     
     return(
-      <div>
+      <div className="col-sm-12">
         <h1>Movie</h1>
         <List 
           movies={this.props.movies.results} 
@@ -56,7 +56,7 @@ var List = React.createClass({
 
   render(){
     return (
-      <div>
+      <div className='col-sm-8'>
         {this.props.movies.map(function(movie, idx) {
           return (
             <Movie 
@@ -142,10 +142,11 @@ var UserList = React.createClass({
   render(){
 
     return (
-      <div className="col-sm-6">
+      <div className="col-sm-4">
         <h3>Set Your List</h3>
         <form ref='form' acceptCharset="UTF-8" action='/users/carts' method='post' onSubmit={ this.handleSubmit }>
          <input type='hidden' name='authenticity_token' value={this.props.authenticity_token} />
+        <p><button type="submit" className='btn btn-success'>Set</button></p>
         {this.props.movies.map(function(movie, idx) {
           if (this.props.favs[movie.id]) {
             return (
@@ -154,6 +155,7 @@ var UserList = React.createClass({
                 {...movie} 
                 fav={this.props.favs[movie.id]}
                 onClick={this._onClick}
+                updateFavs={this._updateFavs}
               
               />  
             );
@@ -161,7 +163,6 @@ var UserList = React.createClass({
             return null
           }
         }.bind(this))};
-        <p><button type="submit" className='btn btn-success'>Set</button></p>
         </form>
       </div>
     );
@@ -175,8 +176,8 @@ var UserMovie = React.createClass({
   render(){
 
     return(
-     <div className="col-sm-4" >
-      <h3>{this.props.title}</h3>
+     <div className="col-sm-6" >
+      <p></p>
         <img 
           src={'http://image.tmdb.org/t/p/w500'+this.props.poster_path} 
           width="150" 
