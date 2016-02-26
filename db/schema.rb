@@ -11,10 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160225030928) do
+ActiveRecord::Schema.define(version: 20160226162546) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "fav_kinds", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "genre_id"
+    t.integer  "counter"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "fav_kinds", ["genre_id"], name: "index_fav_kinds_on_genre_id", using: :btree
+  add_index "fav_kinds", ["user_id"], name: "index_fav_kinds_on_user_id", using: :btree
 
   create_table "genres", force: true do |t|
     t.integer  "genre_id"
