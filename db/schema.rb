@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160226162546) do
+ActiveRecord::Schema.define(version: 20160226173606) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,17 +19,33 @@ ActiveRecord::Schema.define(version: 20160226162546) do
   create_table "fav_kinds", force: true do |t|
     t.integer  "user_id"
     t.integer  "genre_id"
-    t.integer  "counter"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "fav_kinds", ["genre_id"], name: "index_fav_kinds_on_genre_id", using: :btree
   add_index "fav_kinds", ["user_id"], name: "index_fav_kinds_on_user_id", using: :btree
+
+  create_table "fav_lists", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "movie_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "fav_lists", ["movie_id"], name: "index_fav_lists_on_movie_id", using: :btree
+  add_index "fav_lists", ["user_id"], name: "index_fav_lists_on_user_id", using: :btree
 
   create_table "genres", force: true do |t|
     t.integer  "genre_id"
     t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "movies", force: true do |t|
+    t.string   "title"
+    t.integer  "movie_id"
+    t.string   "pic"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -42,5 +58,15 @@ ActiveRecord::Schema.define(version: 20160226162546) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "wish_lists", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "movie_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "wish_lists", ["movie_id"], name: "index_wish_lists_on_movie_id", using: :btree
+  add_index "wish_lists", ["user_id"], name: "index_wish_lists_on_user_id", using: :btree
 
 end

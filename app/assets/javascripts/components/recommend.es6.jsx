@@ -1,9 +1,10 @@
-var Setup = React.createClass({
+var Recommend = React.createClass({
   getInitialState(){
     return {
       movies: this.props.movies,
-      page: 1,
-      favs: {}
+      favs: {},
+      user_id: this.props.user_id,
+      wishes: {}
     };
   },
 
@@ -20,42 +21,40 @@ var Setup = React.createClass({
     });
   },
 
-  _prev(){
-    var page = this.state.page;
-    if (page > 1) {
-      page -= 1;
-    }
-    $.get("/apis/get_movie?page="+page, function(data) {
+  // _updateWishes(movie) {
+  //   var wishes = this.state.wishes;
+  //   if (movie.id in wishes) {
+  //     delete wishes[movie.id];
+  //   } else {
+  //     wishes[movie.id] = movie; 
+  //   }
+
+  //   this.setState({
+  //     wishes: wishes
+  //   });
+  // },
+
+
+  _lucy(){
+    var page = Math.floor(Math.random() * 10) + 1 
+     // var user_id = this.props.user_id
+    $.get("/apis/get_wish?page="+page, function(data) {
       this.setState({
-        page: page,
         movies: data
       });
     }.bind(this));
   },
 
-  _next(){
-    var page = this.state.page;
-    if (page < 227) {
-      page += 1; 
-    }
-    $.get("/apis/get_movie?page="+page, function(data) {
-      this.setState({
-        page: page,
-        movies: data
-      });
-    }.bind(this));
-  },
-
-  _onSubmit(){
+  _onSubmitFav(){
     var user_id = this.props.user_id
     $.ajax({
       type:"POST",
-      url:'/users/carts',
+      url:'/users/wishes',
       data: {favs:this.state.favs},
       dataType: "json",
       success: function(){
         console.log(user_id);
-        location.href = "/users/"+user_id;
+        location.href = "/users/wish/"+user_id;
         
       }
     });
@@ -64,16 +63,17 @@ var Setup = React.createClass({
   render() {
     return(
       <div className="col-sm-12">
-        <h1>Please pick your favorite movies</h1>
+        <h1>Make Your Movie Wish List</h1>
         <div className='col-sm-8'>
-         <button className='btn btn-info' onClick={this._prev}>Previouse Page</button>
-          <button className='btn btn-info' onClick={this._next}>Next Page</button>
+          <button className='btn btn-info' onClick={this._lucy}>I Feel Lucy</button>
         </div>
-         <button className="btn btn-success" onClick={this._onSubmit}> Set Your List</button>
+         <button className="btn btn-success" onClick={this._onSubmitFav}> Set Your List</button>
         <List 
           movies={this.state.movies} 
           updateFavs={this._updateFavs}
+          // updateWishes={this._updateWishes}
           favs={this.state.favs}
+          // wishes={this.state.wishes}
         />
          <UserList 
           updateFavs={this._updateFavs}
@@ -90,6 +90,9 @@ var List = React.createClass({
   _onClick(movie) {
     this.props.updateFavs(movie);
   },
+  //  _pickWishes(movie) {
+  //   this.props.updateWishes(movie);
+  // },
 
   render(){
     return (
@@ -100,7 +103,9 @@ var List = React.createClass({
               key={'movie'+idx} 
               movie={movie}
               isFav={movie.id in this.props.favs}
+              // isWish={movie.id in this.props.Wishes}
               onClick={this._onClick}
+              // onPickWishes={this._pickWishes}
             />
           );
         }.bind(this))}
@@ -114,6 +119,9 @@ var Movie = React.createClass({
   _onClick(e) {
     this.props.onClick(this.props.movie);
   },
+   // _pickWishes(e){
+   //   this.props.onPickWishes(this.props.movie);
+   // },
 
   render(){
     var imgStyle = {
@@ -177,3 +185,49 @@ var UserMovie = React.createClass({
     );
   }
 });
+
+// var UserWishList = React.createClass({
+//   _onClick(movie) {
+//     this.props.updateWishes(movie);
+//   },
+
+//   render(){
+//     var wishes = Object.keys(this.props.wishes).map(function(id) {
+//       var movie = this.props.wishes[id];
+//       return (
+//         <UserWishMovie
+//           key={'movie'+id}
+//           movie={movie}
+//           onClick={this._onClick}
+//         />
+//       );
+//     }.bind(this));
+
+//     return (
+//       <div className="col-sm-4">
+//         {wishes}
+//       </div>
+//     );
+//   }
+// })
+
+// var UserWishMovie = React.createClass({
+//   _onClick(e) {
+//     this.props.onClick(this.props.movie);
+//   },
+
+//   render(){
+//     return(
+//      <div className="col-sm-6" >
+//       <p></p>
+//         <img 
+//           src={'http://image.tmdb.org/t/p/w500'+this.props.movie.poster_path} 
+//           width="150" 
+//           onClick={this._onClick}
+//         />
+        
+//       </div>
+//     );
+//   }
+// });
+
