@@ -1,19 +1,5 @@
 
-<div class="container">
-  <h1>Please pick your favorite movies</h1>
-  <div class="row col-sm-8">
-    <% if $counter >=2%>
-  <form action="/apis/top_moive/prev" method="get" class='col-sm-2'>
-    <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>"/>
 
-    <input type="submit" class="btn btn-primary" value="previous page">
-  </form>
-  <%end%>
-  <form action="/apis/top_moive/next" method="get" class='col-sm-2'>
-    <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>"/>
-    <input type="submit" class="btn btn-primary" value="next page">
-  </form>
-</div>
   
     <%= react_component('Setup', 
                       {:movies => $movies,  authenticity_token: form_authenticity_token},

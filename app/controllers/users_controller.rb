@@ -12,7 +12,6 @@ class UsersController < ApplicationController
     else
       #save user, get top rated movies for users to pick
       @user.save
-      $counter = 1
       session[:user_id] = @user.id
       # render :set_up
       redirect_to :controller=>'users', :action=>'set_up', :id=>current_user.id
@@ -27,7 +26,9 @@ class UsersController < ApplicationController
   end
 
   def carts
-    fail
+    puts params[:favs].inspect
+    #you can save to db table
+    render :json =>{}
   end
   private
   def user_params
