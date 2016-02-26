@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get 'users/:id/set_up' =>'users#set_up'
   get  'apis/get_movie' =>'apis#get_movie'
   get  'apis/get_wish' =>'apis#get_wish'
+  get 'apis/discover'=>'apis#discover'
   post 'users' => 'users#create'
   post 'users/carts'=>'users#carts'
   post 'users/wishes' =>'users#wishes'

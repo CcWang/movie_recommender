@@ -36,9 +36,18 @@ var Recommend = React.createClass({
 
 
   _lucy(){
-    var page = Math.floor(Math.random() * 10) + 1 
+    var page = Math.floor(Math.random() * 25) + 1 
      // var user_id = this.props.user_id
     $.get("/apis/get_wish?page="+page, function(data) {
+      this.setState({
+        movies: data
+      });
+    }.bind(this));
+  },
+  _discover(){
+    var page = Math.floor(Math.random() * 100) + 1 
+     // var user_id = this.props.user_id
+    $.get("/apis/discover?page="+page, function(data) {
       this.setState({
         movies: data
       });
@@ -66,6 +75,7 @@ var Recommend = React.createClass({
         <h1>Make Your Movie Wish List</h1>
         <div className='col-sm-8'>
           <button className='btn btn-info' onClick={this._lucy}>I Feel Lucy</button>
+          <button className='btn btn-primary' onClick={this._discover}>Discover More</button>
         </div>
          <button className="btn btn-success" onClick={this._onSubmitFav}> Set Your List</button>
         <List 

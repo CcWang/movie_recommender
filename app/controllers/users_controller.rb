@@ -105,6 +105,7 @@ class UsersController < ApplicationController
   def remove_favs
 
      current_user.fav_lists.find_by_movie_id(params[:id]).destroy
+     
     redirect_to :back
     
   end

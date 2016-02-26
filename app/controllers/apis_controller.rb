@@ -31,4 +31,12 @@ class ApisController < ApplicationController
       # @recommended_movies = JSON.load(data)['results']
       # @user_id = JSON.load(user)
   end
+
+  def discover
+    discover ="http://api.themoviedb.org/3/discover/movie?api_key=" +APP_ID
+    uri = discover+"&page="+params[:page].to_s
+      data = open(uri)
+      user = current_user.id.to_json
+     render :json => JSON.load(data)['results']
+  end
 end
