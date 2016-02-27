@@ -74,7 +74,7 @@ var Recommend = React.createClass({
       <div className="col-sm-12">
         <h1>Make Your Movie Wish List</h1>
         <div className='col-sm-8'>
-          <button className='btn btn-info' onClick={this._lucy}>I Feel Lucy</button>
+          <button className='btn btn-info' onClick={this._lucy}>I am Feeling Lucky</button>
           <button className='btn btn-primary' onClick={this._discover}>Discover More</button>
         </div>
          <button className="btn btn-success" onClick={this._onSubmitFav}> Set Your List</button>
