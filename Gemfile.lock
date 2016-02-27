@@ -82,8 +82,6 @@ GEM
       bundler (>= 1.3.0, < 2.0)
       railties (= 4.1.8)
       sprockets-rails (~> 2.0)
-    rails-footnotes (4.1.8)
-      rails (>= 3.2)
     rails_12factor (0.0.3)
       rails_serve_static_assets
       rails_stdout_logging
@@ -116,7 +114,7 @@ GEM
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
-    spring (1.6.3)
+    spring (1.6.4)
     sprockets (2.12.4)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -158,7 +156,6 @@ DEPENDENCIES
   less-rails
   pg
   rails (= 4.1.8)
-  rails-footnotes (>= 4.0.0)
   rails_12factor
   react-bootstrap-rails (~> 0.13.0)
   react-rails

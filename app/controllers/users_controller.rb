@@ -49,16 +49,7 @@ class UsersController < ApplicationController
   end
 
   def carts
-<<<<<<< HEAD
-    @movie_title = params[:movie_title]
-    @movie_id = params[:movie_id]
-    @movie_pic = params[:movie_pic]
-    (session[:movie_list] ||= []) << (params[:movie_pic] if !session[:movie_pic].include?params[:movie_pic])
-    session[:movie_list] = session[:movie_list]-[nil]
-    render :json => { 
-    :movie_list =>session[:movie_list]
-    }
-=======
+
     # puts params[:favs].inspect
     params[:favs].each do |f|
       puts f.inspect
@@ -121,7 +112,6 @@ class UsersController < ApplicationController
   end
   def show_favs
     @movies = current_user.fav_movies
->>>>>>> save_to_db
   end
   private
   def user_params
