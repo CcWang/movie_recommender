@@ -97,6 +97,8 @@ GEM
     rake (10.5.0)
     rdoc (4.2.2)
       json (~> 1.4)
+    react-bootstrap-rails (0.13.0)
+      rails (>= 3.1)
     react-rails (1.6.0)
       babel-transpiler (>= 0.7.0)
       coffee-script-source (~> 1.8)
@@ -158,6 +160,7 @@ DEPENDENCIES
   rails (= 4.1.8)
   rails-footnotes (>= 4.0.0)
   rails_12factor
+  react-bootstrap-rails (~> 0.13.0)
   react-rails
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)

@@ -6,15 +6,20 @@ Rails.application.routes.draw do
   get 'session/destroy'
 
   get 'users/index'
+  get 'users/wish/:id' =>'users#show_wishes'
+  get 'users/favs/:id'=>'users#show_favs'
   get 'users/:id' =>'users#show'
   get 'users/:id/set_up' =>'users#set_up'
-  get  'apis/top_moive' =>'apis#get_top_movie'
-  get 'apis/top_moive/next'=>'apis#top_rated_next'
-  get 'apis/top_moive/prev'=>'apis#top_rated_prev'
+  get  'apis/get_movie' =>'apis#get_movie'
+  get  'apis/get_wish' =>'apis#get_wish'
+  get 'apis/discover'=>'apis#discover'
   post 'users' => 'users#create'
   post 'users/carts'=>'users#carts'
+  post 'users/wishes' =>'users#wishes'
   post 'session'=>'session#create'
   delete 'session'=>'session#destroy'
+  delete 'users/fav/:id'=>'users#remove_favs'
+  delete 'users/:id'=>'users#remove_wish'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
