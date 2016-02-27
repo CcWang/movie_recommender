@@ -3,16 +3,30 @@
     $('[data-toggle="popover"]').popover();
     $('img').click(function(){
       counter +=1
-      console.log(counter)
+      <!-- console.log(counter) -->
       movie_id = $(this).attr('id')
       movie_title = $(this).attr('alt')
       movie_pic = $(this).attr('src')
-      $(this).addClass('unclick')
-      cart = "<div class='col-sm-6'><p></p>"
-      cart += "<img width='150' src="+ movie_pic+ "/>"
-      cart +="<input type='hidden' name='movie_id"+counter+"' value='" +movie_id +"'/>"
-      cart +="<input type='hidden' name='movie_title"+counter+"' value='" +movie_title +"'/></div>"
-      $('#user_cart').append(cart)
+      <!-- $(this).addClass('unclick') -->
+
+      $.ajax({
+       url:"/users/carts",
+       data:{
+         movie_id:movie_id,
+         movie_title:movie_title,
+         movie_pic:movie_pic
+        
+     },
+        type: 'POST',
+       success: function(res){
+       
+         $("#user_cart").html(res.movie_list);
+     }
+
+   })
+   return false;
+
+     
     });
 <% end%>
 <div class="container">

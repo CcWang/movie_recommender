@@ -27,7 +27,14 @@ class UsersController < ApplicationController
   end
 
   def carts
-    fail
+    @movie_title = params[:movie_title]
+    @movie_id = params[:movie_id]
+    @movie_pic = params[:movie_pic]
+    (session[:movie_list] ||= []) << (params[:movie_pic] if !session[:movie_pic].include?params[:movie_pic])
+    session[:movie_list] = session[:movie_list]-[nil]
+    render :json => { 
+    :movie_list =>session[:movie_list]
+    }
   end
   private
   def user_params
