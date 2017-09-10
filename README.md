@@ -15,6 +15,6 @@ Users can explore movies based on their favorite movies.
 * Category: full stack
 * Contributor:Chongchong(Cecilia) Wang
 * Stack: React, Ruby on Rails, MongoDB
-* 
+
 ### Screenshots
 ![](https://github.com/CcWang/Ccwang.github.io/blob/master/static/images/movies.jpg)
